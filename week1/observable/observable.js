@@ -1,6 +1,7 @@
 
 
 const Observable = value => {
+
     const listeners = [];
     return {
         onChange: callback => {
