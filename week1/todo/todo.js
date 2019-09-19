@@ -31,7 +31,7 @@ const TodoController = () => {
     const addFortuneTodo = () => {
 
         const newTodo = Todo();
-        fireNotify("Neuste Weisheiten vom König");
+        fireNotify("Fortes Fortuna Adiuvat"); // ist ein lateinisches Sprichwort. Es lässt sich übersetzen als „Den Mutigen hilft das Glück“.
 
         todoModel.add(newTodo);
         newTodo.setText('...');
@@ -75,10 +75,9 @@ const TodoItemsList = (todoController, rootElement) => {
         const [listElement] = createElements();
 
 
-        todoController.onTodoRemove((removedTodo, removeMe) => {
+        todoController.onTodoRemove((removedTodo) => {
             if (removedTodo !== todo) return;
             rootElement.removeChild(listElement);
-            // removeMe();
         });
 
         todo.onTextChanged(() => {
@@ -105,9 +104,9 @@ const TodoItemsView = (todoController, rootElement) => {
         function createElements() {
             const template = document.createElement('DIV'); // only for parsing
             template.innerHTML = `
-                <button class="delete">&times;</button>
+                <button class="delete" tabindex="-1">&times;</button>
                 <input type="text" size="42">
-                <input type="checkbox">            
+                <input type="checkbox" tabindex="-1">            
             `;
             return template.children;
         }
@@ -121,7 +120,7 @@ const TodoItemsView = (todoController, rootElement) => {
             todoController.removeTodo(todo);
         };
 
-        inputElement.oninput = _ => todoTextValidation(inputElement,  checkboxElement, todo, todoController);
+        inputElement.oninput = _ => todoTextValidation(inputElement, checkboxElement, todo, todoController);
 
         todoController.onTodoRemove((removedTodo, removeMe) => {
             if (removedTodo !== todo) return;
@@ -158,7 +157,7 @@ const TodoItemsView = (todoController, rootElement) => {
 };
 
 
-const todoDoneValidation = (textElement, todo) => {
+const todoDoneValidation = (textElement) => {
     const text = textElement.value;
     const min = 3, max = 50;
 
@@ -173,7 +172,7 @@ const todoDoneValidation = (textElement, todo) => {
 
 
 // Text-Validation
-const todoTextValidation = (textElement, checkbox, todo, todoController) => {
+const todoTextValidation = (textElement, checkbox, todo) => {
     const newText = textElement.value;
     const min = 3, max = 50;
 

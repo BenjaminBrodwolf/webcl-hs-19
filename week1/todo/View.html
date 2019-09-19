@@ -19,7 +19,7 @@
     <h1>Todo List</h1>
 
     <div class="holder">
-        <button id="plus" autofocus onclick="todoController.addTodo();"> +</button>
+        <button id="plus" onclick="todoController.addTodo();"> +</button>
         <button id="fortune" onclick="todoController.addFortuneTodo();"> fortune!</button>
 
         <div class="table" id="todoContainer"></div>
@@ -43,6 +43,7 @@
 
 <script src="../module/notify.js"></script>
 <script src="todo.js"></script>
+
 <script>
     console.log("Start");
     const todoController = TodoController();
@@ -50,29 +51,18 @@
     TodoItemsView(todoController, document.getElementById('todoContainer'));
     TodoTotalView(todoController, document.getElementById('numberOfTasks'));
     TodoOpenView(todoController, document.getElementById('openTasks'));
-    TodoItemsList(todoController, document.getElementById('bgTodos'));
-
-    // TodoItemsList(todoController , document.getElementById('allObs'));
+    TodoItemsList(todoController, document.getElementById('bgTodos'));   // flying todos in the background
+    // TodoItemsList(todoController , document.getElementById('allObs')); // list of the todos
 
     todoController.addTodo();
 
-    document.addEventListener("keydown", key => {
-        console.log(key.keyCode);
-        if(key.keyCode === 9){
-           const allTodo = document.getElementById('todoContainer')
-            console.log(allTodo.childNodes)
-            // const allInput = allTodo.filter(e => e.childNodes[0].type = "text")
-            // console.log(allInput)
-
-        }
-    });
-
-
+    // a little bit fortune sound-effect
     const fortune = document.getElementById("fortune");
     const audio = document.getElementById("fortuneAudio");
     fortune.addEventListener("click", () => audio.play());
 
 </script>
+<script src="../module/keyboard.js"></script>
 
 </body>
 

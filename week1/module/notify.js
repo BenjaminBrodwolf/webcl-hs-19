@@ -3,7 +3,6 @@ const fireNotify = message => {
     const msg = document.getElementById("notify");
 
     if (notify.classList.contains("show")) {
-        console.log("EXIST EXIST NOTIFY");
         notify.classList.remove("show");
         notify.style.webkitAnimation = 'none';
         setTimeout(function() {
@@ -13,5 +12,5 @@ const fireNotify = message => {
 
     msg.innerText = message;
     notify.className = "show";
-    notify.addEventListener("animationend", () => notify.classList.remove("show"));        // Standard syntax
+    notify.addEventListener("animationend", () => notify.classList.remove("show"));
 };

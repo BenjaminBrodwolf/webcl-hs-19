@@ -24,8 +24,10 @@ input[type=text] {
     font-size:      1.1em;
     color:          darkblue;
     border-width:   0 0 1px 0;
+
 }
 input[type=text]:focus {
+    background-color: #76fff7;
     border-color:   orange;
     outline:        transparent none 0;
 }
