@@ -1,66 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Todos</title>
-    <link href="week1/todo.css" rel="stylesheet">
-    <link href="week1/module/notify.css" rel="stylesheet">
+    <title>Index-Page</title>
+    <style>
+        body {
+            background-color: powderblue;
 
+        }
+
+        main {
+            text-align: center;
+            background-color: whitesmoke;
+            border-radius: 1rem;
+            max-width: 40em;
+            width: auto;
+            margin: auto;
+            padding: 2em;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        fieldset {
+            text-align: left;
+            border: 4px solid cadetblue;
+            border-radius: 1rem;
+            background-color: rgba(255, 255, 255, .7);
+            padding: 10px;
+        }
+
+        legend {
+            background-color: white;
+            border: 2px solid cadetblue;
+            padding: 7px 20px;
+            border-radius: 1rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+
+        .info {
+            padding: 0 15px;
+        }
+
+        .info fieldset {
+            text-align: left;
+            border: 1px solid #7a7e7e;
+            border-radius: 1rem;
+            background-color: rgba(255, 255, 255, .7);
+            padding: 10px;
+        }
+
+        .info legend {
+            background-color: whitesmoke;
+
+            border-bottom: 1px dotted #7a7e7e;
+            padding: 7px 20px;
+            border-radius: .7rem;
+            font-size: .8rem;
+
+            font-weight: 800;
+        }
+
+
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        .toProjectContainer {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .button {
+            color: white;
+            padding: 7px 20px;
+            border-radius: 10rem;
+            text-transform: uppercase;
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: 800;
+            animation: buttonEffect;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        .button:hover {
+            color: firebrick;
+        }
+
+        @keyframes buttonEffect {
+            0% {
+                background-color: #0cf;
+            }
+
+            100% {
+                background-color: #008fb3;
+            }
+        }
+
+    </style>
 </head>
+
 <body>
-<audio id="fortuneAudio">
-    <source src="week1/module/fortuneSound.mp3">
-    Dein Browser supported keine Audio-Elemente. Doof!
-</audio>
-<a href="week1.html">Week1 Todo</a>
-
 <main>
-    <div id="notify"><p id="message">message</p></div>
+    <h1>Web Clients HS 19</h1>
+    <h5>Benjamin Brodwolf</h5>
 
-    <h1>Todo List</h1>
+    <fieldset>
+        <legend>
+            Week 1 - Todo
+        </legend>
 
-    <div class="holder">
-        <button id="plus" onclick="todoController.addTodo();"> +</button>
-        <button id="fortune" onclick="todoController.addFortuneTodo();"> fortune!</button>
+        <h3>Validierung und Konvertierung einer Todo-App. </h3>
 
-        <div class="table" id="todoContainer"></div>
+        <!--            <div class="info">-->
+        <!--                <fieldset>-->
+        <!--                    <legend> VALIDIERUNG</legend>-->
+        <!--                    Text:-->
+        <!--                    <ul>-->
+        <!--                        <li> längemax. 50, mind 3-->
+        <!--                        </li>-->
+        <!--                    </ul>-->
+        <!--                    Checkbox:-->
+        <!--                    <ul>-->
+        <!--                        <li> Nur wenn Validierung von Text stimmt möglich-->
+        <!--                        </li>-->
+        <!--                    </ul>-->
+        <!--                </fieldset>-->
 
-        <div>Tasks: <span id="numberOfTasks">0</span></div>
-        <div>Open: <span id="openTasks">0</span></div>
+        <!--                <fieldset>-->
+        <!--                    <legend> KONVERTIERUNG</legend>-->
+        <!--                    Text:-->
+        <!--                    <ul>-->
+        <!--                        <li> Wenn "erledigt" durchstrichen und grün, ansonsten rötlich normal-->
+        <!--                        </li>-->
+        <!--                        <li> Wenn fokusiert blauer Hintergund-->
+        <!--                        </li>-->
+        <!--                    </ul>-->
+
+        <!--                    Eingabe:-->
+        <!--                    <ul>-->
+        <!--                        <li> <kbd>TAB-Key</kbd> fokusiere nächsten Text, ansonsten focus auf den Ersten-->
+        <!--                        </li>-->
+        <!--                        <li> <kbd>ENTER-Key</kbd> erstellen eines neuen Todo und wird fokusiert-->
+        <!--                        </li>-->
+        <!--                    </ul>-->
+        <!--                </fieldset>-->
 
 
-        <ul id="allObs"></ul>
-    </div>
+        <!--                <fieldset>-->
+        <!--                    <legend> EXTRAS</legend>-->
+        <!--                    <ul>-->
+        <!--                        <li> Notifyer bei Validierungfehler und beim erstellen von Todos/Fortune-->
+        <!--                        </li>-->
+        <!--                        <li> Alle Todos im Hintergrund (verbindung vie Observable) inkl. validierung-->
+        <!--                        </li>-->
+        <!--                        <li> "Fortune" mit Soundeffeck-->
+        <!--                        </li>-->
+        <!--                    </ul>-->
+        <!--                </fieldset>-->
+
+
+        </div>
+        <div class="toProjectContainer">
+            <a class="button" href="week1.html">Zum Project</a>
+        </div>
+    </fieldset>
+
 
 </main>
 
-<ul id="bgTodos">
-</ul>
-
-<script src="week1/observable/observable.js"></script>
-<script src="week1/dataflow/dataflow.js"></script>
-<script src="week1/todo/fortuneService.js"></script>
-<script src="week1/module/notify.js"></script>
-<script src="week1/todo/todo.js"></script>
-<script>
-    console.log("Start");
-    const todoController = TodoController();
-
-    TodoItemsView(todoController, document.getElementById('todoContainer'));
-    TodoTotalView(todoController, document.getElementById('numberOfTasks'));
-    TodoOpenView(todoController, document.getElementById('openTasks'));
-    TodoItemsList(todoController, document.getElementById('bgTodos'));   // flying todos in the background
-    // TodoItemsList(todoController , document.getElementById('allObs')); // list of the todos
-
-    todoController.addTodo();
-
-    // a little bit fortune sound-effect
-    const fortune = document.getElementById("fortune");
-    const audio = document.getElementById("fortuneAudio");
-    fortune.addEventListener("click", () => audio.play());
-
-</script>
-<script src="week1/module/keyboard.js"></script>
 
 </body>
 

@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Week1 Todo</title>
+    <title>Todos</title>
+    <link href="week1/todo.css" rel="stylesheet">
+    <link href="week1/module/notify.css" rel="stylesheet">
+
 </head>
 <body>
-<h1> blablablab</h1>
+<audio id="fortuneAudio">
+    <source src="week1/module/fortuneSound.mp3">
+    Dein Browser supported keine Audio-Elemente. Doof!
+</audio>
+<a href="index.html" style="color: white">Zurück zum Index</a>
+
+<main>
+    <div id="notify"><p id="message">message</p></div>
+
+    <h1>Todo List</h1>
+
+    <div class="holder">
+        <button id="plus" onclick="todoController.addTodo();"> +</button>
+        <button id="fortune" onclick="todoController.addFortuneTodo();"> fortune!</button>
+
+        <div class="table" id="todoContainer"></div>
+
+        <div>Tasks: <span id="numberOfTasks">0</span></div>
+        <div>Open: <span id="openTasks">0</span></div>
+
+
+        <ul id="allObs"></ul>
+    </div>
+
+</main>
+
+<ul id="bgTodos">
+</ul>
+
+<script src="week1/observable/observable.js"></script>
+<script src="week1/dataflow/dataflow.js"></script>
+<script src="week1/todo/fortuneService.js"></script>
+<script src="week1/module/notify.js"></script>
+<script src="week1/todo/todo.js"></script>
+<script>
+    console.log("Start");
+    const todoController = TodoController();
+
+    TodoItemsView(todoController, document.getElementById('todoContainer'));
+    TodoTotalView(todoController, document.getElementById('numberOfTasks'));
+    TodoOpenView(todoController, document.getElementById('openTasks'));
+    TodoItemsList(todoController, document.getElementById('bgTodos'));   // flying todos in the background
+    // TodoItemsList(todoController , document.getElementById('allObs')); // list of the todos
+
+    todoController.addTodo();
+
+    // a little bit fortune sound-effect
+    const fortune = document.getElementById("fortune");
+    const audio = document.getElementById("fortuneAudio");
+    fortune.addEventListener("click", () => audio.play());
+
+</script>
+<script src="week1/module/keyboard.js"></script>
+
 </body>
+
 </html>
