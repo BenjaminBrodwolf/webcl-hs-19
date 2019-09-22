@@ -24,14 +24,13 @@ const TodoController = () => {
     const addTodo = () => {
         const newTodo = Todo();
         todoModel.add(newTodo);
-        fireNotify("Neues Todo erstellt");
         return newTodo;
     };
 
     const addFortuneTodo = () => {
 
         const newTodo = Todo();
-        fireNotify("Fortes Fortuna Adiuvat"); // ist ein lateinisches Sprichwort. Es lässt sich übersetzen als „Den Mutigen hilft das Glück“.
+        // fireNotify("Fortes Fortuna Adiuvat"); // ist ein lateinisches Sprichwort. Es lässt sich übersetzen als „Den Mutigen hilft das Glück“.
 
         todoModel.add(newTodo);
         newTodo.setText('...');
@@ -59,44 +58,7 @@ const TodoController = () => {
 };
 
 
-const TodoItemsList = (todoController, rootElement) => {
-
-    const render = todo => {
-
-        function createElements() {
-            const template = document.createElement('DIV'); // only for parsing
-            const leftValue = (Math.floor(Math.random() * 90) + 10) + "%";
-            template.innerHTML = `
-                <li style="left: ${leftValue}"></li>       
-            `;
-            return template.children;
-        }
-
-        const [listElement] = createElements();
-
-
-        todoController.onTodoRemove((removedTodo) => {
-            if (removedTodo !== todo) return;
-            rootElement.removeChild(listElement);
-        });
-
-        todo.onTextChanged(() => {
-            listElement.innerText = todo.getText();
-        });
-
-        todo.onDoneChanged(() => {
-            listElement.style.color = (todo.getDone()) ? "green" : "red";
-        });
-
-        rootElement.appendChild(listElement);
-    };
-
-    todoController.onTodoAdd(render);
-};
-
-
 // View-specific parts
-
 const TodoItemsView = (todoController, rootElement) => {
 
     const render = todo => {
@@ -113,14 +75,14 @@ const TodoItemsView = (todoController, rootElement) => {
 
         const [deleteButton, inputElement, checkboxElement] = createElements();
 
+
         checkboxElement.onclick = _ => todo.setDone(checkboxElement.checked);
 
-        deleteButton.onclick = _ => {
-            fireNotify(`Todo wurde entfernt`);
-            todoController.removeTodo(todo);
-        };
+        deleteButton.onclick = _ => todoController.removeTodo(todo);
+
 
         inputElement.oninput = _ => todoTextValidation(inputElement, checkboxElement, todo, todoController);
+
 
         todoController.onTodoRemove((removedTodo, removeMe) => {
             if (removedTodo !== todo) return;
@@ -130,14 +92,12 @@ const TodoItemsView = (todoController, rootElement) => {
             removeMe();
         });
 
-        todo.onTextChanged(() => {
-            inputElement.value = todo.getText();
-        });
+        todo.onTextChanged(() => inputElement.value = todo.getText());
 
         todo.onDoneChanged(() => {
             if (todoDoneValidation(inputElement, todo)) {
-                inputElement.style.textDecoration = (todo.getDone()) ? "line-through" : "none";
-                inputElement.style.color = (todo.getDone()) ? "darkseagreen" : "orangered";
+                inputElement.style.textDecoration = todo.getDone() ? "line-through" : "none";
+                inputElement.style.color = todo.getDone() ? "darkseagreen" : "orangered";
             } else {
                 todo.setDone(false);
                 checkboxElement.checked = false;
@@ -157,13 +117,64 @@ const TodoItemsView = (todoController, rootElement) => {
 };
 
 
-const todoDoneValidation = (textElement) => {
+// View of Todo-List-Template
+const TodoItemsList = (todoController, rootElement) => {
+
+    const render = todo => {
+
+        function createElements() {
+            const template = document.createElement('DIV'); // only for parsing
+            const leftValue = (Math.floor(Math.random() * 90) + 10) + "%"; // range between 10% to 90%
+            template.innerHTML = `
+                <li style="left: ${leftValue}"></li>       
+            `;
+            return template.children;
+        }
+
+        const [listElement] = createElements();
+
+        listElement.onclick = _ => todoController.removeTodo(todo);
+
+        todoController.onTodoRemove((removedTodo) => {
+            if (removedTodo !== todo) return;
+            rootElement.removeChild(listElement);
+        });
+
+        todo.onTextChanged(_ => listElement.innerText = todo.getText());
+
+        todo.onDoneChanged(_ => listElement.style.color = todo.getDone() ? "green" : "red");
+
+        rootElement.appendChild(listElement);
+    };
+
+    todoController.onTodoAdd(render);
+};
+
+
+// Controll the Notifyer trigger
+const TodoNotifyerView = todoController => {
+
+    const notifies = () => {
+
+        todoController.onTodoRemove(_ => fireNotify(`Todo wurde entfernt`));
+
+        todoController.onTodoAdd(_ => fireNotify("Neues Todo erstellt"));
+
+    };
+
+    // binding
+
+    todoController.onTodoAdd(notifies)
+};
+
+
+// Done-Validation
+const todoDoneValidation = textElement => {
     const text = textElement.value;
-    const min = 3, max = 50;
+    const min = 3;
 
     if (text.length < min) {
         fireNotify(`Text  muss min. ${min} Zeichen haben`);
-        // textElement.value = todo.getText();
         return false;
     }
 
@@ -177,7 +188,7 @@ const todoTextValidation = (textElement, checkbox, todo) => {
     const min = 3, max = 50;
 
     if (checkbox.checked) {
-        fireNotify("Fertige Todos können nicht bearbeitet werden");
+        fireNotify("Erledigte Todos können nicht bearbeitet werden");
         textElement.value = todo.getText();
 
     } else {
@@ -185,9 +196,8 @@ const todoTextValidation = (textElement, checkbox, todo) => {
         if (newText.length >= min && newText.length <= max) {
             todo.setText(newText);
             return true;
-        } else {
 
-            // message = "Text " + ((newText.length === 2) ? `muss min. ${min}` : `kann max. ${max}`) + " Zeichen haben";
+        } else {
 
             if (newText.length <= min) {
                 if (newText.length === 0) {
@@ -201,6 +211,7 @@ const todoTextValidation = (textElement, checkbox, todo) => {
     }
     return false;
 };
+
 
 const TodoTotalView = (todoController, numberOfTasksElement) => {
 
@@ -224,6 +235,7 @@ const TodoOpenView = (todoController, numberOfOpenTasksElement) => {
         render();
         todo.onDoneChanged(render);
     });
+
     todoController.onTodoRemove(render);
 };
 

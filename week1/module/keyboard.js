@@ -1,28 +1,32 @@
 document.addEventListener("keydown", key => {
 
-    if (key.keyCode === 13) { // enter
+    // Entey-Key
+    if (key.keyCode === 13) {
 
         todoController.addTodo();
 
         const inputNodes = tabIndex();
-        inputNodes[inputNodes.length - 2].focus()
+        inputNodes[inputNodes.length - 2].focus() // focus the last Input-Element
     }
 
-
-    if (key.keyCode === 9) { // tab
+    // TAB-Key
+    if (key.keyCode === 9) {
 
         const inputNodes = tabIndex();
+
         const activeElement = document.activeElement;
 
-        if (activeElement.type !== "text") {
+        if (activeElement.type !== "text" || activeElement.tabIndex === (inputNodes.length / 3)) {
             if (inputNodes[0]) {
-                inputNodes[0].focus();
+                inputNodes[0].focus(); // focus the first Input-Element
             }
         }
     }
 
 });
 
+
+//append the tabindex to the input-elements
 const tabIndex = () => {
 
     const allNodes = document.getElementById('todoContainer').childNodes;

@@ -51,10 +51,10 @@ input[type=text]:focus {
 
  /* Background Todos-Text*/
 #bgTodos {
-    background-color: blueviolet;
+    /*background-color: blueviolet;*/
     margin: 0px;
     padding: 0px;
-    pointer-events: none;
+    /*pointer-events: stroke;*/
     position: absolute;
     top: 0;
     left: 0;
@@ -74,6 +74,11 @@ input[type=text]:focus {
     height: 50px;
     animation: animate 15s linear infinite;
     bottom: -190px;
+}
+
+#bgTodos li:hover {
+    cursor: crosshair;
+    caret-color: red;
 }
 
 @keyframes animate {
