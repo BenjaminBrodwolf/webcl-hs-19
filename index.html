@@ -68,7 +68,6 @@
             font-weight: 900;
         }
 
-
         h3 {
             text-align: center;
         }
@@ -84,7 +83,6 @@
         a {
             text-decoration: none;
         }
-
 
         .toProjectContainer {
             text-align: right;
@@ -142,19 +140,19 @@
             Week 1 - Todo
         </legend>
 
-        <h3>Validierung und Konvertierung einer Todo-App. </h3>
+        <h3>Validierung und Konvertierung einer Todo-App.</h3>
 
         <div class="info">
             <fieldset>
                 <legend> VALIDIERUNG</legend>
                 <h4>Text:</h4>
                 <ul>
-                    <li> längemax. 50, mind 3
+                    <li> Textlänge max. 50, min. 3
                     </li>
                 </ul>
                 <h4>Checkbox:</h4>
                 <ul>
-                    <li> Nur wenn Validierung von Text stimmt möglich
+                    <li> Nur wenn Validierung von Text gültig ist möglich
                     </li>
                 </ul>
             </fieldset>
@@ -163,17 +161,17 @@
                 <legend> KONVERTIERUNG</legend>
                 <h4>Text:</h4>
                 <ul>
-                    <li> Wenn "erledigt" durchstrichen und grün, ansonsten rötlich normal
+                    <li> Wenn "erledigt" durchgestrichen und grün, ansonsten rot normal
                     </li>
-                    <li> Wenn fokusiert blauer Hintergund
+                    <li> Wenn fokussiert blauer Hintergund
                     </li>
                 </ul>
                 <h4> Eingabe:
                 </h4>
                 <ul>
-                    <li><kbd>TAB-Key</kbd> fokusiere nächsten Text, ansonsten focus auf den Ersten
+                    <li><kbd>TAB</kbd> fokussiere nächsten Text, ansonsten geht der Fokus auf den Ersten
                     </li>
-                    <li><kbd>ENTER-Key</kbd> erstellen eines neuen Todo und wird fokusiert
+                    <li><kbd>ENTER</kbd> erstellt eines neuen Todo und wird fokussiert
                     </li>
                 </ul>
             </fieldset>
@@ -184,7 +182,7 @@
                 <ul>
                     <li> Notifyer bei Validierungfehler und beim erstellen von Todos/Fortune
                     </li>
-                    <li> Alle Todos im Hintergrund (verbindung vie Observable) inkl. validierung
+                    <li> Alle Todos im Hintergrund (verbindung via Observable mit konvertierung)
                     </li>
                     <li> "Fortune" mit Soundeffeck
                     </li>
