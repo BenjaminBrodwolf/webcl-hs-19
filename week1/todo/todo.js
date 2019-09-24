@@ -80,7 +80,6 @@ const TodoItemsView = (todoController, rootElement) => {
 
         deleteButton.onclick = _ => todoController.removeTodo(todo);
 
-
         inputElement.oninput = _ => todoTextValidation(inputElement, checkboxElement, todo, todoController);
 
 
@@ -200,15 +199,18 @@ const todoTextValidation = (textElement, checkbox, todo) => {
         } else {
 
             if (newText.length <= min) {
-                if (newText.length === 0) {
+
+                if (newText.length === 0)
                     fireNotify(`Text muss min. ${min} Zeichen haben`);
-                }
+
             } else {
                 fireNotify(`Text kann max. ${max} Zeichen haben`);
                 textElement.value = todo.getText();
             }
+
         }
     }
+
     return false;
 };
 

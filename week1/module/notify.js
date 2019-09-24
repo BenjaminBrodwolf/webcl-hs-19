@@ -1,6 +1,10 @@
 const fireNotify = message => {
     const notify = document.getElementById("notify");
-    const msg = document.getElementById("notify");
+
+    if (!notify) {
+        console.error("Es wurde kein Notifyer auf der View gesetzt!");
+        return;
+    }
 
     if (notify.classList.contains("show")) {
         notify.classList.remove("show");
@@ -10,7 +14,7 @@ const fireNotify = message => {
         }, 10);
     }
 
-    msg.innerText = message;
+    notify.innerText = message;
     notify.className = "show";
     notify.addEventListener("animationend", () => notify.classList.remove("show"));
 };
