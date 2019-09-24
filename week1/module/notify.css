@@ -19,15 +19,10 @@
         transform: scale(0);
         opacity: 0;
     }
-
     70% {
         transform: scale(1);
         opacity: 1;
     }
-    /*90% {*/
-    /*    transform: scale(1.4);*/
-    /*    opacity: 1;*/
-    /*}*/
     100% {
         transform: scale(1);
         opacity: 1;

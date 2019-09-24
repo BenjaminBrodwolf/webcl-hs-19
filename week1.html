@@ -29,20 +29,22 @@
         <div>Open: <span id="openTasks">0</span></div>
 
 
-        <ul id="allObs"></ul>
+        <ul id="todosList"></ul>
     </div>
+
     <ul id="bgTodos">
     </ul>
 </main>
 
+<!-- Module  -->
+<script src="week1/module/notify.js"></script>
+<script src="week1/module/keyboard.js"></script>
 
 <script src="week1/observable/observable.js"></script>
 <script src="week1/dataflow/dataflow.js"></script>
 <script src="week1/todo/fortuneService.js"></script>
-<script src="week1/module/notify.js"></script>
 <script src="week1/todo/todo.js"></script>
 <script>
-    console.log("Start");
     const todoController = TodoController();
 
     TodoItemsView(todoController, document.getElementById('todoContainer'));
@@ -50,7 +52,7 @@
     TodoOpenView(todoController, document.getElementById('openTasks'));
 
     TodoItemsList(todoController, document.getElementById('bgTodos'));   // flying todos in the background
-    // TodoItemsList(todoController , document.getElementById('allObs')); // list of the todos
+    // TodoItemsList(todoController , document.getElementById('todosList')); // list of todos
 
     TodoNotifyerView(todoController);
 
@@ -62,7 +64,6 @@
     fortune.addEventListener("click", () => audio.play());
 </script>
 
-<script src="week1/module/keyboard.js"></script>
 
 </body>
 

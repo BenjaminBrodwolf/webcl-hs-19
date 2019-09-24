@@ -154,11 +154,9 @@ const TodoItemsList = (todoController, rootElement) => {
 const TodoNotifyerView = todoController => {
 
     const notifies = () => {
-
         todoController.onTodoRemove(_ => fireNotify(`Todo wurde entfernt`));
 
         todoController.onTodoAdd(_ => fireNotify("Neues Todo erstellt"));
-
     };
 
     // binding
@@ -166,6 +164,35 @@ const TodoNotifyerView = todoController => {
     todoController.onTodoAdd(notifies)
 };
 
+
+const TodoTotalView = (todoController, numberOfTasksElement) => {
+
+    const render = () =>
+        numberOfTasksElement.innerText = "" + todoController.numberOfTodos();
+
+    // binding
+
+    todoController.onTodoAdd(render);
+    todoController.onTodoRemove(render);
+};
+
+const TodoOpenView = (todoController, numberOfOpenTasksElement) => {
+
+    const render = () =>
+        numberOfOpenTasksElement.innerText = "" + todoController.numberOfopenTasks();
+
+    // binding
+
+    todoController.onTodoAdd(todo => {
+        render();
+        todo.onDoneChanged(render);
+    });
+
+    todoController.onTodoRemove(render);
+};
+
+
+// ------------------- Validation ------------------
 
 // Done-Validation
 const todoDoneValidation = textElement => {
@@ -213,35 +240,5 @@ const todoTextValidation = (textElement, checkbox, todo) => {
 
     return false;
 };
-
-
-const TodoTotalView = (todoController, numberOfTasksElement) => {
-
-    const render = () =>
-        numberOfTasksElement.innerText = "" + todoController.numberOfTodos();
-
-    // binding
-
-    todoController.onTodoAdd(render);
-    todoController.onTodoRemove(render);
-};
-
-const TodoOpenView = (todoController, numberOfOpenTasksElement) => {
-
-    const render = () =>
-        numberOfOpenTasksElement.innerText = "" + todoController.numberOfopenTasks();
-
-    // binding
-
-    todoController.onTodoAdd(todo => {
-        render();
-        todo.onDoneChanged(render);
-    });
-
-    todoController.onTodoRemove(render);
-};
-
-
-
 
 
