@@ -12,6 +12,7 @@
     <source src="week1/module/fortuneSound.mp3">
     Dein Browser supported keine Audio-Elemente. Doof!
 </audio>
+
 <a href="index.html" style="text-decoration: none;" tabindex="-42"> ↢ Index</a>
 
 <main>
@@ -52,7 +53,7 @@
     TodoOpenView(todoController, document.getElementById('openTasks'));
 
     TodoItemsList(todoController, document.getElementById('bgTodos'));   // flying todos in the background
-    // TodoItemsList(todoController , document.getElementById('todosList')); // list of todos
+    TodoItemsList(todoController, document.getElementById('todosList')); // list of todos
 
     TodoNotifyerView(todoController);
 

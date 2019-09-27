@@ -30,7 +30,6 @@ const TodoController = () => {
     const addFortuneTodo = () => {
 
         const newTodo = Todo();
-        // fireNotify("Fortes Fortuna Adiuvat"); // ist ein lateinisches Sprichwort. Es lässt sich übersetzen als „Den Mutigen hilft das Glück“.
 
         todoModel.add(newTodo);
         newTodo.setText('...');
@@ -80,7 +79,7 @@ const TodoItemsView = (todoController, rootElement) => {
 
         deleteButton.onclick = _ => todoController.removeTodo(todo);
 
-        inputElement.oninput = _ => todoTextValidation(inputElement, checkboxElement, todo, todoController);
+        inputElement.oninput = _ => todoTextValidation(inputElement, checkboxElement, todo, todoController); // text Validation
 
 
         todoController.onTodoRemove((removedTodo, removeMe) => {
@@ -90,6 +89,7 @@ const TodoItemsView = (todoController, rootElement) => {
             rootElement.removeChild(checkboxElement);
             removeMe();
         });
+
 
         todo.onTextChanged(() => inputElement.value = todo.getText());
 
